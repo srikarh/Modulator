@@ -4,7 +4,7 @@ import numpy as np
 import wave
  
 n = 3 # this is how the pitch should change, positive integers increase the frequency, negative integers decrease it.
-chunk = 1024
+chunk = 1024                        
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
 RATE = 41000
@@ -50,8 +50,9 @@ while(time.time()-start < RECORD_SECONDS):
     dataout = np.array(data, dtype='int16')
     chunkout = wave.struct.pack("%dh"%(len(dataout)), *list(dataout)) #convert back to 16-bit data
     stream.write(chunkout)
+    
  
-   
+
  
  
 print ("* done")
