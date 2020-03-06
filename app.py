@@ -1,16 +1,30 @@
-import kivy
-kivy.require('1.10.1') # replace with your current kivy version !
-
 from kivy.app import App
-from kivy.uix.label import Label
+from pitch import pitch
+from kivy.lang import Builder
+from kivy.uix.screenmanager import ScreenManager, Screen
+
+class MainWindow(Screen):
+    pass
 
 
+class SecondWindow(Screen):
+    pass
+    def pitchChange(self, slider):
+        if(slider != 0.0):
+            pitch.modulate(self, slider)
+        
+    
+class WindowManager(ScreenManager):
+    pass
 
-class modulator(App):
 
+kv = Builder.load_file("modulator.kv")
+
+
+class MyMainApp(App):
     def build(self):
-        return Label(text='Hello world')
+        return kv
 
 
-if __name__ == '__main__':
-    modulator().run()
+if __name__ == "__main__":
+    MyMainApp().run()

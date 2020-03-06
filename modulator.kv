@@ -1,0 +1,45 @@
+#:kivy 1.10.1
+WindowManager:
+    MainWindow:
+    SecondWindow:
+
+<MainWindow>:
+    name: "main"
+
+    GridLayout:
+        cols:1
+        Label:
+            text: "Voice Modulation"
+            
+        GridLayout:
+            cols: 3
+            Button:
+                text: "Pitch Modulation"
+                
+                on_release: 
+                    app.root.current = "second"
+                    root.manager.transition.direction = "left"
+                
+
+<SecondWindow>:
+    name: "second"
+    GridLayout:
+        cols:1
+        
+        Slider:
+            id: slider
+            min: -50
+            max: 50
+            step: 2
+            orientation: 'horizontal'
+            on_touch_move: 
+                root.pitchChange(slider.value)
+
+        Label:
+            text: str(slider.value)
+
+        Button:
+            text: "Go Back"
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
