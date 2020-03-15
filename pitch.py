@@ -4,15 +4,19 @@ import numpy as np
 import wave
 
 class pitch:
-    def modulate(self, factor):
-        n = factor # this is how the pitch should change, positive integers increase the frequency, negative integers decrease it.
+    isRunning = False
+
+    def stop(self):
+        self.isRunning = False
+
+    
+    def modulate(self, screen):
         chunk = 1024                        
         FORMAT = pyaudio.paInt16
         CHANNELS = 1
         RATE = 41000
-        RECORD_SECONDS = 5
         swidth = 2
-        
+        self.isRunning = True
         p = pyaudio.PyAudio()
         
         stream = p.open(format = FORMAT,
@@ -24,10 +28,13 @@ class pitch:
         
         
         print ("* recording")
-        
+        print("Slider Value: " + str(screen.prevSlider))
         start = time.time()
-        while(time.time()-start < RECORD_SECONDS):
-        
+        n =  screen.prevSlider # this is how the pitch should change, positive integers increase the frequency, negative integers decrease it.
+        while(self.isRunning):
+            if n != screen.prevSlider:
+                print("Slider Value: " + str(screen.prevSlider))
+            n = screen.prevSlider
             data = stream.read(chunk)
             data = np.array(wave.struct.unpack("%dh"%(len(data)/swidth), data))
         

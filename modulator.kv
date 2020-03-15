@@ -5,21 +5,19 @@ WindowManager:
 
 <MainWindow>:
     name: "main"
-
     GridLayout:
         cols:1
         Label:
             text: "Voice Modulation"
-            
         GridLayout:
             cols: 3
             Button:
                 text: "Pitch Modulation"
                 
                 on_release: 
-                    app.root.current = "second"
                     root.manager.transition.direction = "left"
-                
+                    app.root.current = "second"
+                    
 
 <SecondWindow>:
     name: "second"
@@ -28,9 +26,9 @@ WindowManager:
         
         Slider:
             id: slider
-            min: -50
-            max: 50
-            step: 2
+            min: -10
+            max: 10
+            step: 1
             orientation: 'horizontal'
             on_touch_move: 
                 root.pitchChange(slider.value)
