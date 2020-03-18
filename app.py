@@ -5,7 +5,7 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 
 pitchObj = pitch()
-lock = Lock();
+
 class MainWindow(Screen):   
     pass
 
@@ -19,7 +19,7 @@ class SecondWindow(Screen):
         self.pitchThread = Thread(target=pitch.modulate, args=(pitchObj,self))
         self.pitchThread.start()
 
-    def on_pre_leave(self):
+    def on_pre_leave(self): 
         pitchObj.stop()
     
     def pitchChange(self, slider):
