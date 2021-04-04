@@ -1,16 +1,19 @@
+from logging import setLogRecordFactory
 from kivy.app import App
 from pitch import pitch
+from clone import clone
 from threading import Lock,Thread
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 
 pitchObj = pitch()
+cloneObj = clone()
 
 class MainWindow(Screen):   
     pass
 
 
-class SecondWindow(Screen):
+class PitchWindow(Screen):
     prevSlider = 0
     pitchThread = None
         
@@ -25,6 +28,22 @@ class SecondWindow(Screen):
     def pitchChange(self, slider):
         if slider!=self.prevSlider:
             self.prevSlider = slider
+
+class CloneWindow(Screen):
+    prevSlider = 0
+    cloneThread = None
+    
+    def on_enter(self):
+        self.cloneThread = Thread(target=clone.clone, args=(cloneObj, self))
+        self.cloneThread.start()
+
+    def pitchChange(self, slider):
+        if slider!=self.prevSlider:
+            self.prevSlider = slider
+
+    def on_pre_leave(self):   
+        cloneObj.stop()
+    
         
     
 class WindowManager(ScreenManager):

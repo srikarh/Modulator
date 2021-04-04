@@ -1,14 +1,14 @@
 #:kivy 1.10.1
 WindowManager:
     MainWindow:
-    SecondWindow:
-
+    PitchWindow:
+    CloneWindow:
 <MainWindow>:
     name: "main"
     GridLayout:
         cols:1
         Label:
-            text: "Voice Modulation"
+            text: "Voice Modulator"
         GridLayout:
             cols: 3
             Button:
@@ -16,11 +16,16 @@ WindowManager:
                 
                 on_release: 
                     root.manager.transition.direction = "left"
-                    app.root.current = "second"
-                    
+                    app.root.current = "pitch"
+            Button:
+                text: "Voice Cloning"
+                
+                on_release: 
+                    root.manager.transition.direction = "left"
+                    app.root.current = "clone"
 
-<SecondWindow>:
-    name: "second"
+<PitchWindow>:
+    name: "pitch"
     GridLayout:
         cols:1
         
@@ -41,3 +46,30 @@ WindowManager:
             on_release:
                 app.root.current = "main"
                 root.manager.transition.direction = "right"
+
+
+<CloneWindow>:
+    name: "clone"
+    GridLayout:
+        cols:1
+        GridLayout:
+            rows:2
+            Slider:
+                id: slider
+                min: -10
+                max: 20
+                step: 1
+                orientation: 'horizontal'
+                on_touch_move: 
+                    root.pitchChange(slider.value)
+
+            Label:
+                text: str(slider.value)
+            Button:
+                text: "Voice 1"
+        Button:
+            text: "Go Back"
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+

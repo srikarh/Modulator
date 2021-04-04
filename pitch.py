@@ -34,7 +34,7 @@ class pitch:
         while(self.isRunning):
             if n != screen.prevSlider:
                 print("Slider Value: " + str(screen.prevSlider))
-            n = screen.prevSlider
+                n = screen.prevSlider
             data = stream.read(chunk)
             data = np.array(wave.struct.unpack("%dh"%(len(data)/swidth), data))
         
@@ -56,7 +56,7 @@ class pitch:
             # inverse transform to get back to temporal data
             data = np.fft.irfft(data)
         
-            dataout = np.array(data, dtype='int16')
+            dataout = np.array(data, dtype='int16')  
             chunkout = wave.struct.pack("%dh"%(len(dataout)), *list(dataout)) #convert back to 16-bit data
             stream.write(chunkout)
             
