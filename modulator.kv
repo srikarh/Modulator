@@ -6,11 +6,11 @@ WindowManager:
 <MainWindow>:
     name: "main"
     GridLayout:
-        cols:1
-        Label:
-            text: "Voice Modulator"
+        rows:1
         GridLayout:
             cols: 3
+            Label:
+                text: "Voice Modulator"
             Button:
                 text: "Pitch Modulation"
                 
@@ -27,8 +27,15 @@ WindowManager:
 <PitchWindow>:
     name: "pitch"
     GridLayout:
-        cols:1
-        
+        rows:1
+        Label:
+            text: str(slider.value)
+
+        Button:
+            text: "Go Back"
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
         Slider:
             id: slider
             min: -10
@@ -38,20 +45,17 @@ WindowManager:
             on_touch_move: 
                 root.pitchChange(slider.value)
 
+<CloneWindow>:
+    name: "clone"
+    GridLayout:
+        rows:1
         Label:
             text: str(slider.value)
-
         Button:
             text: "Go Back"
             on_release:
                 app.root.current = "main"
                 root.manager.transition.direction = "right"
-
-
-<CloneWindow>:
-    name: "clone"
-    GridLayout:
-        cols:1
         GridLayout:
             rows:2
             Slider:
@@ -63,13 +67,9 @@ WindowManager:
                 on_touch_move: 
                     root.pitchChange(slider.value)
 
-            Label:
-                text: str(slider.value)
-            Button:
-                text: "Voice 1"
-        Button:
-            text: "Go Back"
-            on_release:
-                app.root.current = "main"
-                root.manager.transition.direction = "right"
-
+            GridLayout:
+                rows:2
+                cols:2
+                Button:
+                    text: "Voice 1"
+        
