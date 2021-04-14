@@ -35,7 +35,7 @@ class pitch:
             if n != screen.prevSlider:
                 print("Slider Value: " + str(screen.prevSlider))
                 n = screen.prevSlider
-            data = stream.read(chunk)
+            data = stream.read(chunk, exception_on_overflow = False)
             data = np.array(wave.struct.unpack("%dh"%(len(data)/swidth), data))
         
             # do real fast Fourier transform
