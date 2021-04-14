@@ -1,5 +1,6 @@
 from logging import setLogRecordFactory
 from kivy.app import App
+from numpy.lib.function_base import select
 from pitch import pitch
 from clone import clone
 from threading import Lock,Thread
@@ -40,6 +41,14 @@ class CloneWindow(Screen):
     def pitchChange(self, slider):
         if slider!=self.prevSlider:
             self.prevSlider = slider
+    
+    def presetChange(self, preset):
+        if preset == 1:
+            self.prevSlider = -10
+        elif preset == 2:
+            self.prevSlider = 0
+        elif preset == 3:
+            self.prevSlider = 20
 
     def on_pre_leave(self):   
         cloneObj.stop()
