@@ -6,6 +6,10 @@ from clone import clone
 from threading import Lock,Thread
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.core.window import Window
+
+Window.size = (320, 240)
+
 
 pitchObj = pitch()
 cloneObj = clone()
