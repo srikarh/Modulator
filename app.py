@@ -56,6 +56,14 @@ class CloneWindow(Screen):
 
     def on_pre_leave(self):   
         cloneObj.stop()
+
+class SeperationWindow(Screen):
+    
+    def on_enter(self):
+        pass
+
+    def on_pre_leave(self):   
+        pass
     
         
     

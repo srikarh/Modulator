@@ -3,12 +3,13 @@ WindowManager:
     MainWindow:
     PitchWindow:
     CloneWindow:
+    SeperationWindow:
 <MainWindow>:
     name: "main"
     GridLayout:
         rows:1
         GridLayout:
-            cols: 3
+            cols: 4
             Label:
                 text: "Voice Modulator"
             Button:
@@ -23,6 +24,12 @@ WindowManager:
                 on_release: 
                     root.manager.transition.direction = "left"
                     app.root.current = "clone"
+            Button:
+                text: "Vocal Seperation"
+                
+                on_release: 
+                    root.manager.transition.direction = "left"
+                    app.root.current = "seperation"
 
 <PitchWindow>:
     name: "pitch"
@@ -79,4 +86,14 @@ WindowManager:
                 Button:
                     text: "Preset 3"
                     on_press: root.presetChange(3)
-        
+
+<SeperationWindow>:
+    name: "seperation"
+    GridLayout:
+        rows:1
+        Button:
+            text: "Go Back"
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+ 
