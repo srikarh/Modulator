@@ -4,23 +4,8 @@
 Vocal separation
 ================
 
-This notebook demonstrates a simple technique for separating vocals (and
-other sporadic foreground signals) from accompanying instrumentation.
-
-This is based on the "REPET-SIM" method of `Rafii and Pardo, 2012
-<http://www.cs.northwestern.edu/~zra446/doc/Rafii-Pardo%20-%20Music-Voice%20Separation%20using%20the%20Similarity%20Matrix%20-%20ISMIR%202012.pdf>`_, but includes a couple of modifications and extensions:
-
-    - FFT windows overlap by 1/4, instead of 1/2
-    - Non-local filtering is converted into a soft mask by Wiener filtering.
-      This is similar in spirit to the soft-masking method used by `Fitzgerald, 2012
-      <http://arrow.dit.ie/cgi/viewcontent.cgi?article=1086&context=argcon>`_,
-      but is a bit more numerically stable in practice.
 """
 
-# Code source: Brian McFee
-# License: ISC
-
-##################
 # Standard imports
 from __future__ import print_function
 import numpy as np
@@ -57,11 +42,6 @@ class seperate:
     plt.colorbar()
     plt.tight_layout()
 
-    ###########################################################
-    # The wiggly lines above are due to the vocal component.
-    # Our goal is to separate them from the accompanying
-    # instrumentation.
-    #
 
     # We'll compare frames using cosine similarity, and aggregate similar frames
     # by taking their (per-frequency) median value.

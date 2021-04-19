@@ -7,9 +7,7 @@ from threading import Lock,Thread
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.core.window import Window
-
-
-Window.fullscreen = True
+Window.size = (320, 240)
 pitchObj = pitch()
 cloneObj = clone()
 
@@ -22,7 +20,7 @@ class PitchWindow(Screen):
     pitchThread = None
         
 
-    def on_enter(self):
+    def on_enter(self):  
         self.pitchThread = Thread(target=pitch.modulate, args=(pitchObj,self))
         self.pitchThread.start()
 
@@ -47,12 +45,13 @@ class CloneWindow(Screen):
     
     def presetChange(self, preset):
         if preset == 1:
-            self.prevSlider = -10
+            self.prevSlider = -6
         elif preset == 2:
-            self.prevSlider = 0
+            self.prevSlider = -3
         elif preset == 3:
-            self.prevSlider = 20
-
+            self.prevSlider = 4
+        elif preset == 4:
+            self.prevSlider = 7
     def on_pre_leave(self):   
         cloneObj.stop()
 
